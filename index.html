@@ -5,17 +5,17 @@
   
 
   
-  <title>Hexo</title>
+  <title>laolei的日常</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="laolei的日常">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="laolei的日常">
 <meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
+<meta property="article:author" content="laolei">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="laolei的日常" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -36,7 +36,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">laolei的日常</a>
       </h1>
       
     </div>
@@ -67,7 +67,7 @@
     <article id="post-双亲委派机制" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" class="article-date">
-  <time datetime="2020-06-27T12:46:24.000Z" itemprop="datePublished">2020-06-27</time>
+  <time datetime="2020-06-27T13:20:23.000Z" itemprop="datePublished">2020-06-27</time>
 </a>
     
   </div>
@@ -86,23 +86,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="双亲委派机制介绍"><a href="#双亲委派机制介绍" class="headerlink" title="双亲委派机制介绍"></a><strong>双亲委派机制</strong>介绍</h3><p>java虚拟机对class文件采用的是<strong>按需加载方式</strong>，即当要使用该类时，才会将他的class文件加载进内存生成class对象。加载某个类的class文件时，采用的是<strong>双亲委派机制</strong>，即把请求交给父类处理，这是一种任务委派模式。</p>
-<p><img src="%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/20200418180536997.png" alt=""></p>
-<h3 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a>工作原理：</h3><p>1.如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行。</p>
+        <h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍:"></a>介绍:</h4><p>java虚拟机对class文件采用的是<strong>按需加载方式</strong>，即当要使用该类时，才会将他的class文件加载进内存生成class对象。加载某个类的class文件时，采用的是<strong>双亲委派机制</strong>，即把请求交给父类处理，这是一种任务委派模式。</p>
+<p><img src="/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/0.png" alt></p>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理:"></a>工作原理:</h4><p>1.如果一个类加载器收到了类加载请求，它并不会自己先去加载，而是把这个请求委托给父类的加载器去执行。</p>
 <p>2.如果父类之上还有父类，则进一步委托，依次递归。一直委托到引导类加载器（启动类加载器）。</p>
 <p>3.如果父类加载器能够完成类加载任务，就成功返回。如果父类加载器无法完成，子类加载器才会自己去加载。</p>
-<h4 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a><strong>举个例子：</strong></h4><p>用户自定义了一个java.lang.String类，此时系统类加载器（应用类加载器）收到加载请求，将请求委托给其父类Object类的加载器，即引导类加载器去加载。而引导类加载器在自己的管辖范围中找到了一个java.lang.String类，所以此时就直接返回，而不会再向下由其子类的加载器去加载。</p>
-<p><img src="%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/20200418180853701.png" alt="在这里插入图片描述">)<img src="%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/2020041818092087.png" alt="在这里插入图片描述"><br>之所以出现这个情况，是因为引导类加载器在核心类库中找到了一个String类，不会再去加载自定义的String类。而String类本身是没有main()方法的。</p>
-<blockquote>
-<p>为什么叫双亲委派机制？<br>网上说法很多。我理解为：系统类加载器要向上委托两次。称之为“双”；这三个加载类的关系就像亲人一样，称之为“亲”。</p>
-</blockquote>
-<h3 id="双亲委派机制的优点："><a href="#双亲委派机制的优点：" class="headerlink" title="双亲委派机制的优点："></a><strong>双亲委派机制的优点：</strong></h3><p>1.避免类重复加载。<br>2.保护程序安全，防止核心api被随意篡改。</p>
-<h3 id="加载器的加载管辖范围："><a href="#加载器的加载管辖范围：" class="headerlink" title="加载器的加载管辖范围："></a><strong>加载器的加载管辖范围：</strong></h3><p><img src="./%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/20200418182549516.png" alt="在这里插入图片描述"><br><img src="./%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/20200418182613723.png" alt="在这里插入图片描述"></p>
+<h5 id="举个例子："><a href="#举个例子：" class="headerlink" title="举个例子："></a>举个例子：</h5><p>用户自定义了一个java.lang.String类，此时系统类加载器（应用类加载器）收到加载请求，将请求委托给其父类Object类的加载器，即引导类加载器去加载。而引导类加载器在自己的管辖范围中找到了一个java.lang.String类，所以此时就直接返回，而不会再向下由其子类的加载器去加载。</p>
+<p><img src="/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/1.png" alt></p>
+<p><img src="/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/2.png" alt></p>
+<p>之所以出现这个情况，是因为引导类加载器在核心类库中找到了一个String类，不会再去加载自定义的String类。而String类本身是没有main()方法的。</p>
+<h4 id="为什么叫双亲委派机制？"><a href="#为什么叫双亲委派机制？" class="headerlink" title="为什么叫双亲委派机制？"></a>为什么叫双亲委派机制？</h4><p>网上说法很多。我理解为：系统类加载器要向上委托两次。称之为“双”；这三个加载类的关系就像亲人一样，称之为“亲”。</p>
+<h4 id="双亲委派机制的优点："><a href="#双亲委派机制的优点：" class="headerlink" title="双亲委派机制的优点："></a>双亲委派机制的优点：</h4><p>1.避免类重复加载。<br>2.保护程序安全，防止核心api被随意篡改。</p>
+<h4 id="加载器的加载管辖范围："><a href="#加载器的加载管辖范围：" class="headerlink" title="加载器的加载管辖范围："></a>加载器的加载管辖范围：</h4><p><img src="/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/3.png" alt></p>
+<p><img src="/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/4.png" alt></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="ckbxnv8os0000fgio4nh87lkw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/06/27/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6/" data-id="ckbxoj5tx00005kio77vob7md" class="article-share-link">Share</a>
       
       
     </footer>
@@ -158,7 +159,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 John Doe<br>
+      &copy; 2020 laolei<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

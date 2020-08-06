@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  
+  <title>springcloud-01 - laolei的日常</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="/favicon.ico" type="image/png" />
+  <meta name="description" content="-Xms128m -Xmx128m 1.系统架构演变随着互联网的发展，网站应用的规模不断扩大。需求的激增，带来的是技术上的压力。系统架构也因此也不断的演进、升级、迭代。从单一应用，到垂直拆分，到分布式服务，到SOA，以及现在火热的微服务架构，还有在Google带领下来势汹涌的Service Mesh。我们到底是该乘坐微服务的船只驶向远方，还是偏安一隅得过且过？ 其实生活不止眼前的苟且，还有诗和远方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springcloud-01">
+<meta property="og:url" content="http://yoursite.com/2020/07/31/springcloud-01/index.html">
+<meta property="og:site_name" content="laolei的日常">
+<meta property="og:description" content="-Xms128m -Xmx128m 1.系统架构演变随着互联网的发展，网站应用的规模不断扩大。需求的激增，带来的是技术上的压力。系统架构也因此也不断的演进、升级、迭代。从单一应用，到垂直拆分，到分布式服务，到SOA，以及现在火热的微服务架构，还有在Google带领下来势汹涌的Service Mesh。我们到底是该乘坐微服务的船只驶向远方，还是偏安一隅得过且过？ 其实生活不止眼前的苟且，还有诗和远方">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525529091749.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525529671801.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525530657919.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525530804753.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525532344817.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1526860071166.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525568965976.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525569352313.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525570921966.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1526877496885.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1526877647406.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1526877995530.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1526877988488.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525573702492.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525575656796.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525575903675.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525576816916.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525576909381.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525576950842.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525576999052.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525577029150.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525577106711.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525577911331.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525593139364.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525594222408.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525595012668.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525597885059.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525598231170.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525598312368.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525604959508.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525605081129.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525609225152.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525613025086.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525613051210.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525613160920.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525615070033.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525615095693.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525615026937.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525615165157.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525617060656.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525617542081.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525618396076.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525619257397.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525619515586.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525619546904.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525620305704.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525620483637.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525620787090.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525620835911.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622320277.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622357371.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622652849.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622699666.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622754316.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622817451.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525622876842.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525623193949.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525653565855.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525653715488.png">
+<meta property="og:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525658269456.png">
+<meta property="article:published_time" content="2020-07-31T09:08:57.000Z">
+<meta property="article:modified_time" content="2020-07-31T11:57:46.152Z">
+<meta property="article:author" content="laolei">
+<meta property="article:tag" content="微服务">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/07/31/springcloud-01/1525529091749.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/gh/nexmoe/nexmoe.github.io@latest/css/style.css,npm/highlight.js@9.15.8/styles/atom-one-dark.css,gh/nexmoe/nexmoe.github.io@latest/lib/mdui_043tiny/css/mdui.css,gh/nexmoe/nexmoe.github.io@latest/lib/iconfont/iconfont.css" crossorigin>
+  
+  <!--<link rel="stylesheet" href="/css/style.css?v=1596681758825">-->
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="laolei" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="laolei"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="laolei">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="laolei" alt="laolei">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>3</div>
+        <div><span>Tags</span>3</div>
+        <div><span>Categories</span>3</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/me.html" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:nexmoe.com" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="Search"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Social</h3>
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="/qq.png" target="_blank" mdui-tooltip="{content: 'QQ'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a>
+    </div>
+</div>
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Categories</h3>
+    <div class="nexmoe-widget">
+
+      <ul class="category-list">
+
+        
+
+
+        
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/c-c-数据结构/">c/c++数据结构</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/java虚拟机/">java虚拟机</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+
+        <li class="category-list-item">
+          <a class="category-list-link" href="/categories/springcloud/">springcloud</a>
+          <span class="category-list-count">1</span>
+        </li>
+
+        
+      </ul>
+
+    </div>
+  </div>
+
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Tag Cloud</h3>
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/jvm/" style="font-size: 10px;">jvm</a> <a href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" style="font-size: 10px;">微服务</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/" style="font-size: 10px;">线性表</a>
+    </div>
+    
+  </div>
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <h3 class="nexmoe-widget-title">Archive</h3>
+    <div class="nexmoe-widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2020 laolei
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://nexmoe.com/hexo-theme-nexmoe.html" target="_blank">Nexmoe</a>
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+  
+      <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+          <img data-src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/cover/5c3aec85a4343.jpg" data-sizes="auto" alt="springcloud-01" class="lazyload">
+          <h1>springcloud-01</h1>
+      </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年07月31日</a>
+    <a><i class="nexmoefont icon-areachart"></i>11.7k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 54 分钟</a>
+</div>
+
+  <div class="nexmoe-post-right">
+    
+      <div class="nexmoe-fixed">
+        <div class="nexmoe-valign">
+            <div class="nexmoe-toc">
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-系统架构演变"><span class="toc-number">1.</span> <span class="toc-text">1.系统架构演变</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-集中式架构"><span class="toc-number">1.1.</span> <span class="toc-text">1.1. 集中式架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-垂直拆分"><span class="toc-number">1.2.</span> <span class="toc-text">1.2.垂直拆分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-分布式服务"><span class="toc-number">1.3.</span> <span class="toc-text">1.3.分布式服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-服务治理（SOA）"><span class="toc-number">1.4.</span> <span class="toc-text">1.4.服务治理（SOA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-微服务"><span class="toc-number">1.5.</span> <span class="toc-text">1.5.微服务</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-远程调用方式"><span class="toc-number">2.</span> <span class="toc-text">2.远程调用方式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-认识RPC"><span class="toc-number">2.1.</span> <span class="toc-text">2.1.认识RPC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-认识Http"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.认识Http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-如何选择？"><span class="toc-number">2.3.</span> <span class="toc-text">2.3.如何选择？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-Http客户端工具"><span class="toc-number">3.</span> <span class="toc-text">3.Http客户端工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-HttpClient"><span class="toc-number">3.1.</span> <span class="toc-text">3.1.HttpClient</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-介绍"><span class="toc-number">3.1.1.</span> <span class="toc-text">3.1.1.介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-使用"><span class="toc-number">3.1.2.</span> <span class="toc-text">3.1.2.使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-Json转换工具"><span class="toc-number">3.1.3.</span> <span class="toc-text">3.1.3.Json转换工具</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对象转json"><span class="toc-number">3.1.3.1.</span> <span class="toc-text">对象转json</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#json转普通对象"><span class="toc-number">3.1.3.2.</span> <span class="toc-text">json转普通对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#json转集合"><span class="toc-number">3.1.3.3.</span> <span class="toc-text">json转集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#json转任意复杂类型"><span class="toc-number">3.1.3.4.</span> <span class="toc-text">json转任意复杂类型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Spring的RestTemplate"><span class="toc-number">3.2.</span> <span class="toc-text">3.3.Spring的RestTemplate</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-初始SpringCloud"><span class="toc-number">4.</span> <span class="toc-text">4.初始SpringCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-简介"><span class="toc-number">4.1.</span> <span class="toc-text">4.1.简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-版本"><span class="toc-number">4.2.</span> <span class="toc-text">4.2.版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-微服务场景模拟"><span class="toc-number">5.</span> <span class="toc-text">5.微服务场景模拟</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-服务提供者"><span class="toc-number">5.1.</span> <span class="toc-text">5.1.服务提供者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-Spring脚手架创建工程"><span class="toc-number">5.1.1.</span> <span class="toc-text">5.1.1.Spring脚手架创建工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-编写代码"><span class="toc-number">5.1.2.</span> <span class="toc-text">5.1.2.编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-3-启动并测试："><span class="toc-number">5.1.3.</span> <span class="toc-text">5.1.3.启动并测试：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-服务调用者"><span class="toc-number">5.2.</span> <span class="toc-text">5.2.服务调用者</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-1-创建工程"><span class="toc-number">5.2.1.</span> <span class="toc-text">5.2.1.创建工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-2-编写代码"><span class="toc-number">5.2.2.</span> <span class="toc-text">5.2.2.编写代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-3-启动测试："><span class="toc-number">5.2.3.</span> <span class="toc-text">5.2.3.启动测试：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-有没有问题？"><span class="toc-number">5.3.</span> <span class="toc-text">5.3.有没有问题？</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-Eureka注册中心"><span class="toc-number">6.</span> <span class="toc-text">6.Eureka注册中心</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-认识Eureka"><span class="toc-number">6.1.</span> <span class="toc-text">6.1.认识Eureka</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-原理图"><span class="toc-number">6.2.</span> <span class="toc-text">6.2.原理图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-入门案例"><span class="toc-number">6.3.</span> <span class="toc-text">6.3.入门案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-编写EurekaServer"><span class="toc-number">6.3.1.</span> <span class="toc-text">6.3.1.编写EurekaServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-将user-service注册到Eureka"><span class="toc-number">6.3.2.</span> <span class="toc-text">6.3.2.将user-service注册到Eureka</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-3-消费者从Eureka获取服务"><span class="toc-number">6.3.3.</span> <span class="toc-text">6.3.3.消费者从Eureka获取服务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-Eureka详解"><span class="toc-number">6.4.</span> <span class="toc-text">6.4.Eureka详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-1-基础架构"><span class="toc-number">6.4.1.</span> <span class="toc-text">6.4.1.基础架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-2-高可用的Eureka-Server"><span class="toc-number">6.4.2.</span> <span class="toc-text">6.4.2.高可用的Eureka Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-3-服务提供者"><span class="toc-number">6.4.3.</span> <span class="toc-text">6.4.3.服务提供者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-4-服务消费者"><span class="toc-number">6.4.4.</span> <span class="toc-text">6.4.4.服务消费者</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-5-失效剔除和自我保护"><span class="toc-number">6.4.5.</span> <span class="toc-text">6.4.5.失效剔除和自我保护</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-负载均衡Robbin"><span class="toc-number">7.</span> <span class="toc-text">7.负载均衡Robbin</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-启动两个服务实例"><span class="toc-number">7.1.</span> <span class="toc-text">7.1.启动两个服务实例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-开启负载均衡"><span class="toc-number">7.2.</span> <span class="toc-text">7.2.开启负载均衡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-源码跟踪"><span class="toc-number">7.3.</span> <span class="toc-text">7.3.源码跟踪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-负载均衡策略"><span class="toc-number">7.4.</span> <span class="toc-text">7.4.负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-重试机制"><span class="toc-number">7.5.</span> <span class="toc-text">7.5.重试机制</span></a></li></ol></li></ol>
+            </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <article>
+    <p>-Xms128m -Xmx128m</p>
+<h1 id="1-系统架构演变"><a href="#1-系统架构演变" class="headerlink" title="1.系统架构演变"></a>1.系统架构演变</h1><p>随着互联网的发展，网站应用的规模不断扩大。需求的激增，带来的是技术上的压力。系统架构也因此也不断的演进、升级、迭代。从单一应用，到垂直拆分，到分布式服务，到SOA，以及现在火热的微服务架构，还有在Google带领下来势汹涌的Service Mesh。我们到底是该乘坐微服务的船只驶向远方，还是偏安一隅得过且过？</p>
+<p>其实生活不止眼前的苟且，还有诗和远方。所以我们今天就回顾历史，看一看系统架构演变的历程；把握现在，学习现在最火的技术架构；展望未来，争取成为一名优秀的Java工程师。</p>
+<h2 id="1-1-集中式架构"><a href="#1-1-集中式架构" class="headerlink" title="1.1. 集中式架构"></a>1.1. 集中式架构</h2><p>当网站流量很小时，只需一个应用，将所有功能都部署在一起，以减少部署节点和成本。此时，用于简化增删改查工作量的数据访问框架(ORM)是影响项目开发的关键。</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525529091749.png" alt="1525529091749" class="lazyload"></p>
+<p>存在的问题：</p>
+<ul>
+<li>代码耦合，开发维护困难</li>
+<li>无法针对不同模块进行针对性优化</li>
+<li>无法水平扩展</li>
+<li>单点容错率低，并发能力差</li>
+</ul>
+<h2 id="1-2-垂直拆分"><a href="#1-2-垂直拆分" class="headerlink" title="1.2.垂直拆分"></a>1.2.垂直拆分</h2><p>当访问量逐渐增大，单一应用无法满足需求，此时为了应对更高的并发和业务需求，我们根据业务功能对系统进行拆分：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525529671801.png" alt="1525529671801" class="lazyload"></p>
+<p>优点：</p>
+<ul>
+<li>系统拆分实现了流量分担，解决了并发问题</li>
+<li>可以针对不同模块进行优化</li>
+<li>方便水平扩展，负载均衡，容错率提高</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>系统间相互独立，会有很多重复开发工作，影响开发效率</li>
+</ul>
+<h2 id="1-3-分布式服务"><a href="#1-3-分布式服务" class="headerlink" title="1.3.分布式服务"></a>1.3.分布式服务</h2><p>当垂直应用越来越多，应用之间交互不可避免，将核心业务抽取出来，作为独立的服务，逐渐形成稳定的服务中心，使前端应用能更快速的响应多变的市场需求。此时，用于提高业务复用及整合的分布式调用是关键。</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525530657919.png" alt="1525530657919" class="lazyload"></p>
+<p>优点：</p>
+<ul>
+<li>将基础服务进行了抽取，系统间相互调用，提高了代码复用和开发效率</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>系统间耦合度变高，调用关系错综复杂，难以维护</li>
+</ul>
+<h2 id="1-4-服务治理（SOA）"><a href="#1-4-服务治理（SOA）" class="headerlink" title="1.4.服务治理（SOA）"></a>1.4.服务治理（SOA）</h2><p>当服务越来越多，容量的评估，小服务资源的浪费等问题逐渐显现，此时需增加一个调度中心基于访问压力实时管理集群容量，提高集群利用率。此时，用于提高机器利用率的资源调度和治理中心(SOA)是关键</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525530804753.png" alt="1525530804753" class="lazyload"></p>
+<p>以前出现了什么问题？</p>
+<ul>
+<li>服务越来越多，需要管理每个服务的地址</li>
+<li>调用关系错综复杂，难以理清依赖关系</li>
+<li>服务过多，服务状态难以管理，无法根据服务情况动态管理</li>
+</ul>
+<p>服务治理要做什么？</p>
+<ul>
+<li>服务注册中心，实现服务自动注册和发现，无需人为记录服务地址</li>
+<li>服务自动订阅，服务列表自动推送，服务调用透明化，无需关心依赖关系</li>
+<li>动态监控服务状态监控报告，人为控制服务状态</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>服务间会有依赖关系，一旦某个环节出错会影响较大</li>
+<li>服务关系复杂，运维、测试部署困难，不符合DevOps思想</li>
+</ul>
+<h2 id="1-5-微服务"><a href="#1-5-微服务" class="headerlink" title="1.5.微服务"></a>1.5.微服务</h2><p>前面说的SOA，英文翻译过来是面向服务。微服务，似乎也是服务，都是对系统进行拆分。因此两者非常容易混淆，但其实缺有一些差别：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525532344817.png" alt="1525532344817" class="lazyload"></p>
+<p>微服务的特点：</p>
+<ul>
+<li>单一职责：微服务中每一个服务都对应唯一的业务能力，做到单一职责</li>
+<li>微：微服务的服务拆分粒度很小，例如一个用户管理就可以作为一个服务。每个服务虽小，但“五脏俱全”。</li>
+<li>面向服务：面向服务是说每个服务都要对外暴露服务接口API。并不关心服务的技术实现，做到与平台和语言无关，也不限定用什么技术实现，只要提供Rest的接口即可。</li>
+<li>自治：自治是说服务间互相独立，互不干扰<ul>
+<li>团队独立：每个服务都是一个独立的开发团队，人数不能过多。</li>
+<li>技术独立：因为是面向服务，提供Rest接口，使用什么技术没有别人干涉</li>
+<li>前后端分离：采用前后端分离开发，提供统一Rest接口，后端不用再为PC、移动段开发不同接口</li>
+<li>数据库分离：每个服务都使用自己的数据源</li>
+<li>部署独立，服务间虽然有调用，但要做到服务重启不影响其它服务。有利于持续集成和持续交付。每个服务都是独立的组件，可复用，可替换，降低耦合，易维护</li>
+</ul>
+</li>
+</ul>
+<p>微服务结构图：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1526860071166.png" alt="1526860071166" class="lazyload"></p>
+<h1 id="2-远程调用方式"><a href="#2-远程调用方式" class="headerlink" title="2.远程调用方式"></a>2.远程调用方式</h1><p>无论是微服务还是SOA，都面临着服务间的远程调用。那么服务间的远程调用方式有哪些呢？</p>
+<p>常见的远程调用方式有以下几种：</p>
+<ul>
+<li><p>RPC：Remote Produce Call远程过程调用，类似的还有RMI。自定义数据格式，基于原生TCP通信，速度快，效率高。早期的webservice，现在热门的dubbo，都是RPC的典型</p>
+</li>
+<li><p>Http：http其实是一种网络传输协议，基于TCP，规定了数据传输的格式。现在客户端浏览器与服务端通信基本都是采用Http协议。也可以用来进行远程服务调用。缺点是消息封装臃肿。</p>
+<p>现在热门的Rest风格，就可以通过http协议来实现。</p>
+</li>
+</ul>
+<h2 id="2-1-认识RPC"><a href="#2-1-认识RPC" class="headerlink" title="2.1.认识RPC"></a>2.1.认识RPC</h2><p>RPC，即 Remote Procedure Call（远程过程调用），是一个计算机通信协议。 该协议允许运行于一台计算机的程序调用另一台计算机的子程序，而程序员无需额外地为这个交互作用编程。说得通俗一点就是：A计算机提供一个服务，B计算机可以像调用本地服务那样调用A计算机的服务。</p>
+<p>通过上面的概念，我们可以知道，实现RPC主要是做到两点： </p>
+<ul>
+<li>实现远程调用其他计算机的服务<ul>
+<li>要实现远程调用，肯定是通过网络传输数据。A程序提供服务，B程序通过网络将请求参数传递给A，A本地执行后得到结果，再将结果返回给B程序。这里需要关注的有两点：<ul>
+<li>1）采用何种网络通讯协议？<ul>
+<li>现在比较流行的RPC框架，都会采用TCP作为底层传输协议</li>
+</ul>
+</li>
+<li>2）数据传输的格式怎样？<ul>
+<li>两个程序进行通讯，必须约定好数据传输格式。就好比两个人聊天，要用同一种语言，否则无法沟通。所以，我们必须定义好请求和响应的格式。另外，数据在网路中传输需要进行序列化，所以还需要约定统一的序列化的方式。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>像调用本地服务一样调用远程服务 <ul>
+<li>如果仅仅是远程调用，还不算是RPC，因为RPC强调的是过程调用，调用的过程对用户而言是应该是透明的，用户不应该关心调用的细节，可以像调用本地服务一样调用远程服务。所以RPC一定要对调用的过程进行封装</li>
+</ul>
+</li>
+</ul>
+<p>RPC调用流程图：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525568965976.png" alt="1525568965976" class="lazyload"></p>
+<p>想要了解详细的RPC实现，给大家推荐一篇文章：<a href="https://legacy.gitbook.com/book/huge0612/tour-of-rpc/details" target="_blank" rel="noopener">自己动手实现RPC</a></p>
+<h2 id="2-2-认识Http"><a href="#2-2-认识Http" class="headerlink" title="2.2.认识Http"></a>2.2.认识Http</h2><p>Http协议：超文本传输协议，是一种应用层协议。规定了网络传输的请求格式、响应格式、资源定位和操作的方式等。但是底层采用什么网络传输协议，并没有规定，不过现在都是采用TCP协议作为底层传输协议。说到这里，大家可能觉得，Http与RPC的远程调用非常像，都是按照某种规定好的数据格式进行网络通信，有请求，有响应。没错，在这点来看，两者非常相似，但是还是有一些细微差别。</p>
+<ul>
+<li>RPC并没有规定数据传输格式，这个格式可以任意指定，不同的RPC协议，数据格式不一定相同。</li>
+<li>Http中还定义了资源定位的路径，RPC中并不需要</li>
+<li>最重要的一点：RPC需要满足像调用本地服务一样调用远程服务，也就是对调用过程在API层面进行封装。Http协议没有这样的要求，因此请求、响应等细节需要我们自己去实现。<ul>
+<li>优点：RPC方式更加透明，对用户更方便。Http方式更灵活，没有规定API和语言，跨语言、跨平台</li>
+<li>缺点：RPC方式需要在API层面进行封装，限制了开发的语言环境。</li>
+</ul>
+</li>
+</ul>
+<p>例如我们通过浏览器访问网站，就是通过Http协议。只不过浏览器把请求封装，发起请求以及接收响应，解析响应的事情都帮我们做了。如果是不通过浏览器，那么这些事情都需要自己去完成。</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525569352313.png" alt="1525569352313" class="lazyload"></p>
+<h2 id="2-3-如何选择？"><a href="#2-3-如何选择？" class="headerlink" title="2.3.如何选择？"></a>2.3.如何选择？</h2><p>既然两种方式都可以实现远程调用，我们该如何选择呢？</p>
+<ul>
+<li>速度来看，RPC要比http更快，虽然底层都是TCP，但是http协议的信息往往比较臃肿，不过可以采用gzip压缩。</li>
+<li>难度来看，RPC实现较为复杂，http相对比较简单</li>
+<li>灵活性来看，http更胜一筹，因为它不关心实现细节，跨平台、跨语言。</li>
+</ul>
+<p>因此，两者都有不同的使用场景：</p>
+<ul>
+<li>如果对效率要求更高，并且开发过程使用统一的技术栈，那么用RPC还是不错的。</li>
+<li>如果需要更加灵活，跨语言、跨平台，显然http更合适</li>
+</ul>
+<p>那么我们该怎么选择呢？</p>
+<p>微服务，更加强调的是独立、自治、灵活。而RPC方式的限制较多，因此微服务框架中，一般都会采用基于Http的Rest风格服务。</p>
+<h1 id="3-Http客户端工具"><a href="#3-Http客户端工具" class="headerlink" title="3.Http客户端工具"></a>3.Http客户端工具</h1><p>既然微服务选择了Http，那么我们就需要考虑自己来实现对请求和响应的处理。不过开源世界已经有很多的http客户端工具，能够帮助我们做这些事情，例如：</p>
+<ul>
+<li>HttpClient</li>
+<li>OKHttp</li>
+<li>URLConnection</li>
+</ul>
+<p>接下来，我们就一起了解一款比较流行的客户端工具：HttpClient</p>
+<h2 id="3-1-HttpClient"><a href="#3-1-HttpClient" class="headerlink" title="3.1.HttpClient"></a>3.1.HttpClient</h2><h3 id="3-1-1-介绍"><a href="#3-1-1-介绍" class="headerlink" title="3.1.1.介绍"></a>3.1.1.介绍</h3><p>HttpClient是Apache公司的产品，是Http Components下的一个组件。</p>
+<p><a href="http://hc.apache.org/index.html" target="_blank" rel="noopener">官网地址：http://hc.apache.org/index.html</a></p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525570921966.png" alt="1525570921966" class="lazyload"></p>
+<p>特点：</p>
+<ul>
+<li>基于标准、纯净的Java语言。实现了Http1.0和Http1.1</li>
+<li>以可扩展的面向对象的结构实现了Http全部的方法（GET, POST, PUT, DELETE, HEAD, OPTIONS, and TRACE）</li>
+<li>支持HTTPS协议。</li>
+<li>通过Http代理建立透明的连接。</li>
+<li>自动处理Set-Cookie中的Cookie。</li>
+</ul>
+<h3 id="3-1-2-使用"><a href="#3-1-2-使用" class="headerlink" title="3.1.2.使用"></a>3.1.2.使用</h3><p>发起get请求:<code><pre>@Test<br>public void testGet() throws IOException {<br>        HttpGet request = new HttpGet("<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>);<br>        String response = this.httpClient.execute(request, new BasicResponseHandler());<br>        System.out.println(response);<br>}</pre></code></p>
+<p>发起Post请求：<code><pre>@Test<br>public void testPost() throws IOException {<br>    HttpPost request = new HttpPost("<a href="http://www.oschina.net/&quot;" target="_blank" rel="noopener">http://www.oschina.net/&quot;</a>);<br>    request.setHeader("User-Agent",<br>                      "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");<br>    String response = this.httpClient.execute(request, new BasicResponseHandler());<br>    System.out.println(response);<br>}</pre></code></p>
+<p>尝试访问昨天编写的接口：<a href="http://localhost/hello" target="_blank" rel="noopener">http://localhost/hello</a></p>
+<p>这个接口返回一个User对象<code><pre>@Test<br>public void testGetPojo() throws IOException {<br>    HttpGet request = new HttpGet("<a href="http://localhost/hello&quot;" target="_blank" rel="noopener">http://localhost/hello&quot;</a>);<br>    String response = this.httpClient.execute(request, new BasicResponseHandler());<br>    System.out.println(response);<br>}</pre></code></p>
+<p>我们实际得到的是一个json字符串：<code><pre>{<br>    "id": 8,<br>    "userName": "liuyan",<br>    "password": "123456",<br>    "name": "柳岩",<br>    "age": 21,<br>    "sex": 2,<br>    "birthday": "1995-08-07T16:00:00.000+0000",<br>    "created": "2014-09-20T03:41:15.000+0000",<br>    "updated": "2014-09-20T03:41:15.000+0000",<br>    "note": "柳岩同学在传智播客学表演"<br>}</pre></code></p>
+<p>如果想要得到对象，我们还需要手动进行Json反序列化，这一点比较麻烦。</p>
+<h3 id="3-1-3-Json转换工具"><a href="#3-1-3-Json转换工具" class="headerlink" title="3.1.3.Json转换工具"></a>3.1.3.Json转换工具</h3><p>HttpClient请求数据后是json字符串，需要我们自己把Json字符串反序列化为对象，我们会使用JacksonJson工具来实现。</p>
+<p><code>JacksonJson</code>是SpringMVC内置的json处理工具，其中有一个<code>ObjectMapper</code>类，可以方便的实现对json的处理：</p>
+<h4 id="对象转json"><a href="#对象转json" class="headerlink" title="对象转json"></a>对象转json</h4><p><code><pre>// json处理工具<br>    private ObjectMapper mapper = new ObjectMapper();<br>    @Test<br>    public void testJson() throws JsonProcessingException {<br>        User user = new User();<br>        user.setId(8L);<br>        user.setAge(21);<br>        user.setName("柳岩");<br>        user.setUserName("liuyan");<br>        // 序列化<br>        String json = mapper.writeValueAsString(user);<br>        System.out.println("json = " + json);<br>    }</pre></code></p>
+<p>结果：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1526877496885.png" alt="1526877496885" class="lazyload"></p>
+<h4 id="json转普通对象"><a href="#json转普通对象" class="headerlink" title="json转普通对象"></a>json转普通对象</h4><pre><code>// json处理工具
+private ObjectMapper mapper = new ObjectMapper();
+@Test
+public void testJson() throws IOException {
+    User user = new User();
+    user.setId(8L);
+    user.setAge(21);
+    user.setName(&quot;柳岩&quot;);
+    user.setUserName(&quot;liuyan&quot;);
+    // 序列化
+    String json = mapper.writeValueAsString(user);
+    // 反序列化，接收两个参数：json数据，反序列化的目标类字节码
+    User result = mapper.readValue(json, User.class);
+    System.out.println(&quot;result = &quot; + result);
+}</code></pre><p>结果：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1526877647406.png" alt="1526877647406" class="lazyload"></p>
+<h4 id="json转集合"><a href="#json转集合" class="headerlink" title="json转集合"></a>json转集合</h4><p>json转集合比较麻烦，因为你无法同时把集合的class和元素的class同时传递到一个参数。</p>
+<p>因此Jackson做了一个类型工厂，用来解决这个问题：</p>
+<pre><code>// json处理工具
+private ObjectMapper mapper = new ObjectMapper();
+@Test
+public void testJson() throws IOException {
+    User user = new User();
+    user.setId(8L);
+    user.setAge(21);
+    user.setName(&quot;柳岩&quot;);
+    user.setUserName(&quot;liuyan&quot;);
+    // 序列化,得到对象集合的json字符串
+    String json = mapper.writeValueAsString(Arrays.asList(user, user));
+
+    // 反序列化，接收两个参数：json数据，反序列化的目标类字节码
+    List&lt;User&gt; users = mapper.readValue(json,                 
+                                mapper.getTypeFactory().
+                                   constructCollectionType(List.class, User.class));
+    for (User u : users) {
+        System.out.println(&quot;u = &quot; + u);
+    }
+}</code></pre><p>结果：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1526877995530.png" alt="1526877995530" class="lazyload"></p>
+<h4 id="json转任意复杂类型"><a href="#json转任意复杂类型" class="headerlink" title="json转任意复杂类型"></a>json转任意复杂类型</h4><p>当对象泛型关系复杂时，类型工厂也不好使了。这个时候Jackson提供了TypeReference来接收类型泛型，然后底层通过反射来获取泛型上的具体类型。实现数据转换</p>
+<pre><code>// json处理工具
+private ObjectMapper mapper = new ObjectMapper();
+@Test
+public void testJson() throws IOException {
+    User user = new User();
+    user.setId(8L);
+    user.setAge(21);
+    user.setName(&quot;柳岩&quot;);
+    user.setUserName(&quot;liuyan&quot;);
+    // 序列化,得到对象集合的json字符串
+    String json = mapper.writeValueAsString(Arrays.asList(user, user));
+
+    // 反序列化，接收两个参数：json数据，反序列化的目标类字节码
+    List&lt;User&gt; users = mapper.readValue(json, new TypeReference&lt;List&lt;User&gt;&gt;(){});
+    for (User u : users) {
+        System.out.println(&quot;u = &quot; + u);
+    }
+}</code></pre><p>结果：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1526877988488.png" alt="1526877988488" class="lazyload"></p>
+<h2 id="3-3-Spring的RestTemplate"><a href="#3-3-Spring的RestTemplate" class="headerlink" title="3.3.Spring的RestTemplate"></a>3.3.Spring的RestTemplate</h2><p>Spring提供了一个RestTemplate模板工具类，对基于Http的客户端进行了封装，并且实现了对象与json的序列化和反序列化，非常方便。RestTemplate并没有限定Http的客户端类型，而是进行了抽象，目前常用的3种都有支持：</p>
+<ul>
+<li>HttpClient</li>
+<li>OkHttp</li>
+<li>JDK原生的URLConnection（默认的）</li>
+</ul>
+<p>首先在项目中注册一个<code>RestTemplate</code>对象，可以在启动类位置注册：</p>
+<pre><code>@SpringBootApplication
+public class HttpDemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(HttpDemoApplication.class, args);
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        // 默认的RestTemplate，底层是走JDK的URLConnection方式。
+        return new RestTemplate();
+    }
+}</code></pre><p>在测试类中直接<code>@Autowired</code>注入：</p>
+<pre><code>@RunWith(SpringRunner.class)
+@SpringBootTest(classes = HttpDemoApplication.class)
+public class HttpDemoApplicationTests {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Test
+    public void httpGet() {
+        User user = this.restTemplate.getForObject(&quot;http://localhost/hello&quot;, User.class);
+        System.out.println(user);
+    }
+}</code></pre><ul>
+<li>通过RestTemplate的getForObject()方法，传递url地址及实体类的字节码，RestTemplate会自动发起请求，接收响应，并且帮我们对响应结果进行反序列化。</li>
+</ul>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525573702492.png" alt="1525573702492" class="lazyload"></p>
+<p>学习完了Http客户端工具，接下来就可以正式学习微服务了。</p>
+<h1 id="4-初始SpringCloud"><a href="#4-初始SpringCloud" class="headerlink" title="4.初始SpringCloud"></a>4.初始SpringCloud</h1><p>微服务是一种架构方式，最终肯定需要技术架构去实施。</p>
+<p>微服务的实现方式很多，但是最火的莫过于Spring Cloud了。为什么？</p>
+<ul>
+<li>后台硬：作为Spring家族的一员，有整个Spring全家桶靠山，背景十分强大。</li>
+<li>技术强：Spring作为Java领域的前辈，可以说是功力深厚。有强力的技术团队支撑，一般人还真比不了</li>
+<li>群众基础好：可以说大多数程序员的成长都伴随着Spring框架，试问：现在有几家公司开发不用Spring？SpringCloud与Spring的各个框架无缝整合，对大家来说一切都是熟悉的配方，熟悉的味道。</li>
+<li>使用方便：相信大家都体会到了SpringBoot给我们开发带来的便利，而SpringCloud完全支持SpringBoot的开发，用很少的配置就能完成微服务框架的搭建</li>
+</ul>
+<h2 id="4-1-简介"><a href="#4-1-简介" class="headerlink" title="4.1.简介"></a>4.1.简介</h2><p>SpringCloud是Spring旗下的项目之一，<a href="http://projects.spring.io/spring-cloud/" target="_blank" rel="noopener">官网地址：http://projects.spring.io/spring-cloud/</a></p>
+<p>Spring最擅长的就是集成，把世界上最好的框架拿过来，集成到自己的项目中。</p>
+<p>SpringCloud也是一样，它将现在非常流行的一些技术整合到一起，实现了诸如：配置管理，服务发现，智能路由，负载均衡，熔断器，控制总线，集群状态等等功能。其主要涉及的组件包括：</p>
+<p>netflix</p>
+<ul>
+<li>Eureka：注册中心</li>
+<li>Zuul：服务网关</li>
+<li>Ribbon：负载均衡</li>
+<li>Feign：服务调用</li>
+<li>Hystix：熔断器</li>
+</ul>
+<p>以上只是其中一部分，架构图：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525575656796.png" alt="1525575656796" class="lazyload"></p>
+<h2 id="4-2-版本"><a href="#4-2-版本" class="headerlink" title="4.2.版本"></a>4.2.版本</h2><p>SpringCloud的版本命名比较特殊，因为它不是一个组件，而是许多组件的集合，它的命名是以A到Z的为首字母的一些单词组成：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525575903675.png" alt="1525575903675" class="lazyload"></p>
+<p>我们在项目中，会是以Finchley的版本。</p>
+<p>其中包含的组件，也都有各自的版本，如下表：</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Edgware.SR3</th>
+<th>Finchley.RC1</th>
+<th>Finchley.BUILD-SNAPSHOT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>spring-cloud-aws</td>
+<td>1.2.2.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-bus</td>
+<td>1.3.2.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-cli</td>
+<td>1.4.1.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-commons</td>
+<td>1.3.3.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-contract</td>
+<td>1.2.4.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-config</td>
+<td>1.4.3.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-netflix</td>
+<td>1.4.4.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-security</td>
+<td>1.2.2.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-cloudfoundry</td>
+<td>1.1.1.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-consul</td>
+<td>1.3.3.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-sleuth</td>
+<td>1.3.3.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-stream</td>
+<td>Ditmars.SR3</td>
+<td>Elmhurst.RELEASE</td>
+<td>Elmhurst.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-zookeeper</td>
+<td>1.2.1.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-boot</td>
+<td>1.5.10.RELEASE</td>
+<td>2.0.1.RELEASE</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-task</td>
+<td>1.2.2.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.RELEASE</td>
+</tr>
+<tr>
+<td>spring-cloud-vault</td>
+<td>1.1.0.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-gateway</td>
+<td>1.0.1.RELEASE</td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+<tr>
+<td>spring-cloud-openfeign</td>
+<td></td>
+<td>2.0.0.RC1</td>
+<td>2.0.0.BUILD-SNAPSHOT</td>
+</tr>
+</tbody></table>
+<p>接下来，我们就一一学习SpringCloud中的重要组件。</p>
+<h1 id="5-微服务场景模拟"><a href="#5-微服务场景模拟" class="headerlink" title="5.微服务场景模拟"></a>5.微服务场景模拟</h1><p>首先，我们需要模拟一个服务调用的场景。方便后面学习微服务架构</p>
+<h2 id="5-1-服务提供者"><a href="#5-1-服务提供者" class="headerlink" title="5.1.服务提供者"></a>5.1.服务提供者</h2><p>我们新建一个项目，对外提供查询用户的服务。</p>
+<h3 id="5-1-1-Spring脚手架创建工程"><a href="#5-1-1-Spring脚手架创建工程" class="headerlink" title="5.1.1.Spring脚手架创建工程"></a>5.1.1.Spring脚手架创建工程</h3><p>借助于Spring提供的快速搭建工具：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525576816916.png" alt="1525576816916" class="lazyload"></p>
+<p>填写项目信息：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525576909381.png" alt="1525576909381" class="lazyload"></p>
+<p>添加web依赖：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525576950842.png" alt="1525576950842" class="lazyload"></p>
+<p>添加mybatis依赖：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525576999052.png" alt="1525576999052" class="lazyload"></p>
+<p>填写项目位置：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525577029150.png" alt="1525577029150" class="lazyload"></p>
+<p>生成的项目结构：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525577106711.png" alt="1525577106711" class="lazyload"></p>
+<p>依赖也已经全部自动引入：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.leyou.demo&lt;/groupId&gt;
+    &lt;artifactId&gt;user-service-demo&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;user-service-demo&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.0.1.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-jdbc&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;
+            &lt;version&gt;1.3.2&lt;/version&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;mysql&lt;/groupId&gt;
+            &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+            &lt;scope&gt;runtime&lt;/scope&gt;
+        &lt;/dependency&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;</code></pre><h3 id="5-1-2-编写代码"><a href="#5-1-2-编写代码" class="headerlink" title="5.1.2.编写代码"></a>5.1.2.编写代码</h3><p>添加一个对外查询的接口：</p>
+<pre><code>@RestController
+@RequestMapping(&quot;user&quot;)
+public class UserController {
+    @Autowired
+    private UserService userService;
+
+    @GetMapping(&quot;/{id}&quot;)
+    public User queryById(@PathVariable(&quot;id&quot;) Long id) {
+        return this.userService.queryById(id);
+    }
+}</code></pre><p>Service：</p>
+<pre><code>@Service
+public class UserService {
+    @Autowired
+    private UserMapper userMapper;
+
+    public User queryById(Long id) {
+        return this.userMapper.selectByPrimaryKey(id);
+    }
+}</code></pre><p>mapper:<code><pre>@Mapper<br>public interface UserMapper extends tk.mybatis.mapper.common.Mapper<User>{<br>}</User></pre></code></p>
+<p>实体类：</p>
+<pre><code>@Table(name = &quot;tb_user&quot;)
+@Data
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    // 用户名
+    private String userName;
+
+    // 密码
+    private String password;
+
+    // 姓名
+    private String name;
+
+    // 年龄
+    private Integer age;
+
+    // 性别，1男性，2女性
+    private Integer sex;
+
+    // 出生日期
+    private Date birthday;
+
+    // 创建时间
+    private Date created;
+
+    // 更新时间
+    private Date updated;
+
+    // 备注
+    private String note;
+}</code></pre><p>属性文件,这里我们采用了yaml语法，而不是properties：<code><pre>server:<br>  port: 8081<br>spring:<br>  datasource:<br>    url: jdbc:mysql://localhost:3306/mydb01<br>    username: root<br>    password: 123<br>    hikari:<br>      maximum-pool-size: 20<br>      minimum-idle: 10<br>mybatis:<br>  type-aliases-package: com.leyou.userservice.pojo</pre><code></code></code></p>
+<p>项目结构：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525577911331.png" alt="1525577911331" class="lazyload"></p>
+<h3 id="5-1-3-启动并测试："><a href="#5-1-3-启动并测试：" class="headerlink" title="5.1.3.启动并测试："></a>5.1.3.启动并测试：</h3><p>启动项目，访问接口：<a href="http://localhost:8081/user/7" target="_blank" rel="noopener">http://localhost:8081/user/7</a></p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525593139364.png" alt="1525593139364" class="lazyload"></p>
+<h2 id="5-2-服务调用者"><a href="#5-2-服务调用者" class="headerlink" title="5.2.服务调用者"></a>5.2.服务调用者</h2><h3 id="5-2-1-创建工程"><a href="#5-2-1-创建工程" class="headerlink" title="5.2.1.创建工程"></a>5.2.1.创建工程</h3><p>与上面类似，这里不再赘述，需要注意的是，我们调用user-service的功能，因此不需要mybatis相关依赖了。</p>
+<p>pom：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.leyou.demo&lt;/groupId&gt;
+    &lt;artifactId&gt;user-consumer-demo&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;user-consumer-demo&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.0.1.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+        &lt;!-- 添加OkHttp支持 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;com.squareup.okhttp3&lt;/groupId&gt;
+            &lt;artifactId&gt;okhttp&lt;/artifactId&gt;
+            &lt;version&gt;3.9.0&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+&lt;/project&gt;</code></pre><h3 id="5-2-2-编写代码"><a href="#5-2-2-编写代码" class="headerlink" title="5.2.2.编写代码"></a>5.2.2.编写代码</h3><p>首先在启动类中注册<code>RestTemplate</code>：</p>
+<pre><code>@SpringBootApplication
+public class UserConsumerDemoApplication {
+    @Bean
+    public RestTemplate restTemplate() {
+        // 这次我们使用了OkHttp客户端,只需要注入工厂即可
+        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
+    }
+
+    public static void main(String[] args) {
+        SpringApplication.run(UserConsumerDemoApplication.class, args);
+    }
+}</code></pre><p>然后编写UserDao，注意，这里不是调用mapper查数据库，而是通过RestTemplate远程查询user-service-demo中的接口：</p>
+<pre><code>@Component
+public class UserDao {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    public User queryUserById(Long id){
+        String url = &quot;http://localhost:8081/user/&quot; + id;
+        return this.restTemplate.getForObject(url, User.class);
+    }
+}</code></pre><p>然后编写user-service，循环查询UserDAO信息：</p>
+<pre><code>@Service
+public class UserService {
+    @Autowired
+    private UserDao userDao;
+
+    public List&lt;User&gt; querUserByIds(List&lt;Long&gt; ids){
+        List&lt;User&gt; users = new ArrayList&lt;&gt;();
+        for (Long id : ids) {
+            User user = this.userDao.queryUserById(id);
+            users.add(user);
+        }
+        return users;
+    }
+}</code></pre><p>编写controller：</p>
+<pre><code>@RestController
+@RequestMapping(&quot;consume&quot;)
+public class ConsumerController {
+    @Autowired
+    private UserService userService;
+
+    @GetMapping
+    public List&lt;User&gt; consume(@RequestParam(&quot;ids&quot;) List&lt;Long&gt; ids) {
+        return this.userService.queryUserByIds(ids);
+    }
+}</code></pre><h3 id="5-2-3-启动测试："><a href="#5-2-3-启动测试：" class="headerlink" title="5.2.3.启动测试："></a>5.2.3.启动测试：</h3><p>因为我们没有配置端口，那么默认就是8080，我们访问：<a href="http://localhost:8080/consume?ids=6,7,8" target="_blank" rel="noopener">http://localhost:8080/consume?ids=6,7,8</a></p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525594222408.png" alt="1525594222408" class="lazyload"></p>
+<p>一个简单的远程服务调用案例就实现了。</p>
+<h2 id="5-3-有没有问题？"><a href="#5-3-有没有问题？" class="headerlink" title="5.3.有没有问题？"></a>5.3.有没有问题？</h2><p>简单回顾一下，刚才我们写了什么：</p>
+<ul>
+<li>use-service-demo：一个提供根据id查询用户的微服务</li>
+<li>consumer-demo：一个服务调用者，通过RestTemplate远程调用user-service-demo</li>
+</ul>
+<p>流程如下：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525595012668.png" alt="1525595012668" class="lazyload"></p>
+<p>存在什么问题？</p>
+<ul>
+<li>在consumer中，我们把url地址硬编码到了代码中，不方便后期维护</li>
+<li>consumer需要记忆user-service的地址，如果出现变更，可能得不到通知，地址将失效</li>
+<li>consumer不清楚user-service的状态，服务宕机也不知道</li>
+<li>user-service只有1台服务，不具备高可用性</li>
+<li>即便user-service形成集群，consumer还需自己实现负载均衡</li>
+</ul>
+<p>其实上面说的问题，概括一下就是分布式服务必然要面临的问题：</p>
+<ul>
+<li>服务管理<ul>
+<li>如何自动注册和发现</li>
+<li>如何实现状态监管</li>
+<li>如何实现动态路由</li>
+</ul>
+</li>
+<li>服务如何实现负载均衡</li>
+<li>服务如何解决容灾问题</li>
+<li>服务如何实现统一配置</li>
+</ul>
+<p>以上的问题，我们都将在SpringCloud中得到答案。</p>
+<h1 id="6-Eureka注册中心"><a href="#6-Eureka注册中心" class="headerlink" title="6.Eureka注册中心"></a>6.Eureka注册中心</h1><h2 id="6-1-认识Eureka"><a href="#6-1-认识Eureka" class="headerlink" title="6.1.认识Eureka"></a>6.1.认识Eureka</h2><p>首先我们来解决第一问题，服务的管理。</p>
+<blockquote>
+<p>问题分析</p>
+</blockquote>
+<p>在刚才的案例中，user-service对外提供服务，需要对外暴露自己的地址。而consumer（调用者）需要记录服务提供者的地址。将来地址出现变更，还需要及时更新。这在服务较少的时候并不觉得有什么，但是在现在日益复杂的互联网环境，一个项目肯定会拆分出十几，甚至数十个微服务。此时如果还人为管理地址，不仅开发困难，将来测试、发布上线都会非常麻烦，这与DevOps的思想是背道而驰的。</p>
+<blockquote>
+<p>网约车</p>
+</blockquote>
+<p>这就好比是 网约车出现以前，人们出门叫车只能叫出租车。一些私家车想做出租却没有资格，被称为黑车。而很多人想要约车，但是无奈出租车太少，不方便。私家车很多却不敢拦，而且满大街的车，谁知道哪个才是愿意载人的。一个想要，一个愿意给，就是缺少引子，缺乏管理啊。</p>
+<p>此时滴滴这样的网约车平台出现了，所有想载客的私家车全部到滴滴注册，记录你的车型（服务类型），身份信息（联系方式）。这样提供服务的私家车，在滴滴那里都能找到，一目了然。</p>
+<p>此时要叫车的人，只需要打开APP，输入你的目的地，选择车型（服务类型），滴滴自动安排一个符合需求的车到你面前，为你服务，完美！</p>
+<blockquote>
+<p>Eureka做什么？</p>
+</blockquote>
+<p>Eureka就好比是滴滴，负责管理、记录服务提供者的信息。服务调用者无需自己寻找服务，而是把自己的需求告诉Eureka，然后Eureka会把符合你需求的服务告诉你。</p>
+<p>同时，服务提供方与Eureka之间通过<code>“心跳”</code>机制进行监控，当某个服务提供方出现问题，Eureka自然会把它从服务列表中剔除。</p>
+<p>这就实现了服务的自动注册、发现、状态监控。</p>
+<h2 id="6-2-原理图"><a href="#6-2-原理图" class="headerlink" title="6.2.原理图"></a>6.2.原理图</h2><blockquote>
+<p>基本架构：</p>
+</blockquote>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525597885059.png" alt="1525597885059" class="lazyload"></p>
+<ul>
+<li>Eureka：就是服务注册中心（可以是一个集群），对外暴露自己的地址</li>
+<li>提供者：启动后向Eureka注册自己信息（地址，提供什么服务）</li>
+<li>消费者：向Eureka订阅服务，Eureka会将对应服务的所有提供者地址列表发送给消费者，并且定期更新</li>
+<li>心跳(续约)：提供者定期通过http方式向Eureka刷新自己的状态</li>
+</ul>
+<h2 id="6-3-入门案例"><a href="#6-3-入门案例" class="headerlink" title="6.3.入门案例"></a>6.3.入门案例</h2><h3 id="6-3-1-编写EurekaServer"><a href="#6-3-1-编写EurekaServer" class="headerlink" title="6.3.1.编写EurekaServer"></a>6.3.1.编写EurekaServer</h3><p>接下来我们创建一个项目，启动一个EurekaServer：</p>
+<p>依然使用spring提供的快速搭建工具：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525598231170.png" alt="1525598231170" class="lazyload"></p>
+<p>选择依赖：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525598312368.png" alt="1525598312368" class="lazyload"></p>
+<p>完整的Pom文件：</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+    &lt;groupId&gt;com.leyou.demo&lt;/groupId&gt;
+    &lt;artifactId&gt;eureka-demo&lt;/artifactId&gt;
+    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
+    &lt;packaging&gt;jar&lt;/packaging&gt;
+
+    &lt;name&gt;eureka-demo&lt;/name&gt;
+    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;
+
+    &lt;parent&gt;
+        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+        &lt;version&gt;2.0.1.RELEASE&lt;/version&gt;
+        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;
+    &lt;/parent&gt;
+
+    &lt;properties&gt;
+        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;
+        &lt;java.version&gt;1.8&lt;/java.version&gt;
+        &lt;!-- SpringCloud版本，是最新的F系列 --&gt;
+        &lt;spring-cloud.version&gt;Finchley.RC1&lt;/spring-cloud.version&gt;
+    &lt;/properties&gt;
+
+    &lt;dependencies&gt;
+        &lt;!-- Eureka服务端 --&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;/artifactId&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+
+    &lt;dependencyManagement&gt;
+        &lt;dependencies&gt;
+            &lt;!-- SpringCloud依赖，一定要放到dependencyManagement中，起到管理版本的作用即可 --&gt;
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
+                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
+                &lt;type&gt;pom&lt;/type&gt;
+                &lt;scope&gt;import&lt;/scope&gt;
+            &lt;/dependency&gt;
+        &lt;/dependencies&gt;
+    &lt;/dependencyManagement&gt;
+
+    &lt;build&gt;
+        &lt;plugins&gt;
+            &lt;plugin&gt;
+                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;
+            &lt;/plugin&gt;
+        &lt;/plugins&gt;
+    &lt;/build&gt;
+
+    &lt;repositories&gt;
+        &lt;repository&gt;
+            &lt;id&gt;spring-milestones&lt;/id&gt;
+            &lt;name&gt;Spring Milestones&lt;/name&gt;
+            &lt;url&gt;https://repo.spring.io/milestone &lt;/url&gt;
+            &lt;snapshots&gt;
+                &lt;enabled&gt;false&lt;/enabled&gt;
+            &lt;/snapshots&gt;
+        &lt;/repository&gt;
+    &lt;/repositories&gt;
+&lt;/project&gt;</code></pre><p>编写启动类：</p>
+<pre><code>@SpringBootApplication
+@EnableEurekaServer // 声明这个应用是一个EurekaServer
+public class EurekaDemoApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(EurekaDemoApplication.class, args);
+    }
+}</code></pre><p>编写配置：<code><pre>server:<br>  port: 10086 # 端口<br>spring:<br>  application:<br>    name: eureka-server # 应用名称，会在Eureka中显示<br>eureka:<br>  client:<br>    register-with-eureka: false # 是否注册自己的信息到EurekaServer，默认是true<br>    fetch-registry: false # 是否拉取其它服务的信息，默认是true<br>    service-url: # EurekaServer的地址，现在是自己的地址，如果是集群，需要加上其它Server的地址。<br>      defaultZone: <a href="http://127.0.0.1:${server.port}/eureka">http://127.0.0.1:${server.port}/eureka</a></pre></code></p>
+<p>启动服务，并访问：<a href="http://127.0.0.1:10086/eureka" target="_blank" rel="noopener">http://127.0.0.1:10086/eureka</a></p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525604959508.png" alt="1525604959508" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525605081129.png" alt="1525605081129" class="lazyload"></p>
+<h3 id="6-3-2-将user-service注册到Eureka"><a href="#6-3-2-将user-service注册到Eureka" class="headerlink" title="6.3.2.将user-service注册到Eureka"></a>6.3.2.将user-service注册到Eureka</h3><p>注册服务，就是在服务上添加Eureka的客户端依赖，客户端代码会自动把服务注册到EurekaServer中。</p>
+<blockquote>
+<p>我们在user-service-demo中添加Eureka客户端依赖：</p>
+</blockquote>
+<p>先添加SpringCloud依赖：<code><pre>&lt;!-- SpringCloud的依赖 --><br>&lt;dependencyManagement><br>    &lt;dependencies><br>        &lt;dependency><br>            &lt;groupId>org.springframework.cloud&lt;/groupId><br>            &lt;artifactId>spring-cloud-dependencies&lt;/artifactId><br>            &lt;version>Finchley.RC1&lt;/version><br>           &lt;type>pom&lt;/type><br>            &lt;scope>import&lt;/scope><br>        &lt;/dependency><br>    &lt;/dependencies><br>&lt;/dependencyManagement><br>&lt;!-- Spring的仓库地址 --><br>&lt;repositories><br>   &lt;repository><br>        &lt;id>spring-milestones&lt;/id><br>        &lt;name>Spring Milestones&lt;/name><br>        &lt;url><a href="https://repo.spring.io/milestone" target="_blank" rel="noopener">https://repo.spring.io/milestone</a> &lt;/url><br>        &lt;snapshots><br>            &lt;enabled>false&lt;/enabled><br>        &lt;/snapshots><br>    &lt;/repository><br>&lt;/repositories></pre></code></p>
+<p>然后是Eureka客户端：</p>
+<p><code><pre>&lt;!-- Eureka客户端 --><br>&lt;dependency><br>    &lt;groupId>org.springframework.cloud&lt;/groupId><br>    &lt;artifactId>spring-cloud-starter-netflix-eureka-client&lt;/artifactId><br>&lt;/dependency></pre></code></p>
+<blockquote>
+<p>在启动类上开启Eureka客户端功能</p>
+</blockquote>
+<p>通过添加<code>@EnableDiscoveryClient</code>来开启Eureka客户端功能<code><pre>@SpringBootApplication<br>@EnableDiscoveryClient    <br>public class UserServiceDemoApplication {<br>    public static void main(String[] args) {<br>        SpringApplication.run(UserServiceDemoApplication.class, args);<br>    }<br>}</pre></code></p>
+<blockquote>
+<p>编写配置</p>
+</blockquote>
+<p><code><pre>server:<br>  port: 8081<br>spring:<br>  datasource:<br>    url: jdbc:mysql://localhost:3306/mydb01<br>    username: root<br>    password: 123<br>    hikari:<br>      maximum-pool-size: 20<br>      minimum-idle: 10<br>  application:<br>    name: user-service # 应用名称<br>mybatis:<br>  type-aliases-package: com.leyou.userservice.pojo<br>eureka:<br>  client:<br>    service-url: # EurekaServer地址<br>      defaultZone: <a href="http://127.0.0.1:10086/eureka" target="_blank" rel="noopener">http://127.0.0.1:10086/eureka</a><br>  instance:<br>    prefer-ip-address: true # 当调用getHostname获取实例的hostname时，返回ip而不是host名称<br>    ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找</pre></code></p>
+<p>注意：</p>
+<ul>
+<li>这里我们添加了spring.application.name属性来指定应用名称，将来会作为应用的id使用。</li>
+<li>不用指定register-with-eureka和fetch-registry，因为默认是true</li>
+</ul>
+<blockquote>
+<p>重启项目，访问<a href="http://127.0.0.1:10086/eureka" target="_blank" rel="noopener">Eureka监控页面</a>查看</p>
+</blockquote>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525609225152.png" alt="1525609225152" class="lazyload"></p>
+<p>我们发现user-service服务已经注册成功了</p>
+<h3 id="6-3-3-消费者从Eureka获取服务"><a href="#6-3-3-消费者从Eureka获取服务" class="headerlink" title="6.3.3.消费者从Eureka获取服务"></a>6.3.3.消费者从Eureka获取服务</h3><p>接下来我们修改consumer-demo，尝试从EurekaServer获取服务。</p>
+<p>方法与消费者类似，只需要在项目中添加EurekaClient依赖，就可以通过服务名称来获取信息了！</p>
+<p>1）添加依赖：</p>
+<p>先添加SpringCloud依赖：</p>
+<p><code><pre>&lt;!-- SpringCloud的依赖 --><br>&lt;dependencyManagement><br>   &lt;dependencies><br>        &lt;dependency><br>            &lt;groupId>org.springframework.cloud&lt;/groupId><br>            &lt;artifactId>spring-cloud-dependencies&lt;/artifactId><br>            &lt;version>Finchley.RC1&lt;/version><br>            &lt;type>pom&lt;/type><br>            &lt;scope>import&lt;/scope><br>       &lt;/dependency><br>    &lt;/dependencies><br>&lt;dependencyManagement><br>&lt;!-- Spring的仓库地址 --><br>&lt;repositories><br>    &lt;repository><br>       &lt;id>spring-milestones&lt;/id><br>        &lt;name>Spring Milestones&lt;/name><br>        &lt;url><a href="https://repo.spring.io/milestone" target="_blank" rel="noopener">https://repo.spring.io/milestone</a> &lt;/url><br>        &lt;snapshots><br>            &lt;enabled>false&lt;/enabled><br>        &lt;/snapshots><br>    &lt;/repository><br>&lt;/repositories></pre><code></code></code></p>
+<p>然后是Eureka客户端：<code><pre>&lt;!-- Eureka客户端 --><br>&lt;dependency><br>    &lt;groupId>org.springframework.cloud&lt;/groupId><br>    &lt;artifactId>spring-cloud-starter-netflix-eureka-client&lt;/artifactId><br>&lt;/dependency></pre></code></p>
+<p>2）在启动类开启Eureka客户端<code><pre>@SpringBootApplication<br>@EnableDiscoveryClient<br> public class UserConsumerDemoApplication {<br>    @Bean<br>    public RestTemplate restTemplate() {<br>        return new RestTemplate(new OkHttp3ClientHttpRequestFactory());<br>    }<br>    public static void main(String[] args) {<br>        SpringApplication.run(UserConsumerDemoApplication.class, args);<br>    }<br>}</pre></code></p>
+<p>3）修改配置：<code><pre>server:<br>  port: 8080<br>spring:<br>  application:<br>    name: consumer # 应用名称<br>eureka:<br>  client:<br>    service-url: # EurekaServer地址<br>      defaultZone: <a href="http://127.0.0.1:10086/eureka" target="_blank" rel="noopener">http://127.0.0.1:10086/eureka</a><br>  instance:<br>    prefer-ip-address: true # 当其它服务获取地址时提供ip而不是hostname<br>    ip-address: 127.0.0.1 # 指定自己的ip信息，不指定的话会自己寻找</pre></code></p>
+<p>4）修改代码，用DiscoveryClient类的方法，根据服务名称，获取服务实例：</p>
+<pre><code>@Service
+public class UserService {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;// Eureka客户端，可以获取到服务实例信息
+
+    public List&lt;User&gt; queryUserByIds(List&lt;Long&gt; ids) {
+        List&lt;User&gt; users = new ArrayList&lt;&gt;();
+        // String baseUrl = &quot;http://localhost:8081/user/&quot;;
+        // 根据服务名称，获取服务实例
+        List&lt;ServiceInstance&gt; instances = discoveryClient.getInstances(&quot;user-service&quot;);
+        // 因为只有一个UserService,因此我们直接get(0)获取
+        ServiceInstance instance = instances.get(0);
+        // 获取ip和端口信息
+        String baseUrl = &quot;http://&quot;+instance.getHost() + &quot;:&quot; + instance.getPort()+&quot;/user/&quot;;
+        ids.forEach(id -&gt; {
+            // 我们测试多次查询，
+            users.add(this.restTemplate.getForObject(baseUrl + id, User.class));
+            // 每次间隔500毫秒
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        return users;
+    }
+}</code></pre><p>5）Debug跟踪运行：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525613025086.png" alt="1525613025086" class="lazyload"></p>
+<p>生成的URL：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525613051210.png" alt="1525613051210" class="lazyload"></p>
+<p>访问结果：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525613160920.png" alt="1525613160920" class="lazyload"></p>
+<h2 id="6-4-Eureka详解"><a href="#6-4-Eureka详解" class="headerlink" title="6.4.Eureka详解"></a>6.4.Eureka详解</h2><p>接下来我们详细讲解Eureka的原理及配置。</p>
+<h3 id="6-4-1-基础架构"><a href="#6-4-1-基础架构" class="headerlink" title="6.4.1.基础架构"></a>6.4.1.基础架构</h3><p>Eureka架构中的三个核心角色：</p>
+<ul>
+<li><p>服务注册中心</p>
+<p>Eureka的服务端应用，提供服务注册和发现功能，就是刚刚我们建立的eureka-demo</p>
+</li>
+<li><p>服务提供者</p>
+<p>提供服务的应用，可以是SpringBoot应用，也可以是其它任意技术实现，只要对外提供的是Rest风格服务即可。本例中就是我们实现的user-service-demo</p>
+</li>
+<li><p>服务消费者</p>
+<p>消费应用从注册中心获取服务列表，从而得知每个服务方的信息，知道去哪里调用服务方。本例中就是我们实现的consumer-demo</p>
+</li>
+</ul>
+<h3 id="6-4-2-高可用的Eureka-Server"><a href="#6-4-2-高可用的Eureka-Server" class="headerlink" title="6.4.2.高可用的Eureka Server"></a>6.4.2.高可用的Eureka Server</h3><p>Eureka Server即服务的注册中心，在刚才的案例中，我们只有一个EurekaServer，事实上EurekaServer也可以是一个集群，形成高可用的Eureka中心。</p>
+<blockquote>
+<p>服务同步</p>
+</blockquote>
+<p>多个Eureka Server之间也会互相注册为服务，当服务提供者注册到Eureka Server集群中的某个节点时，该节点会把服务的信息同步给集群中的每个节点，从而实现<strong>数据同步</strong>。因此，无论客户端访问到Eureka Server集群中的任意一个节点，都可以获取到完整的服务列表信息。</p>
+<blockquote>
+<p>动手搭建高可用的EurekaServer</p>
+</blockquote>
+<p>我们假设要搭建两条EurekaServer的集群，端口分别为：10086和10087</p>
+<p>1）我们修改原来的EurekaServer配置：<code><pre>server:<br>  port: 10086 # 端口<br>spring:<br>  application:<br>    name: eureka-server # 应用名称，会在Eureka中显示<br>eureka:<br>  client:<br>    service-url: # 配置其他Eureka服务的地址，而不是自己，比如10087<br>      defaultZone: <a href="http://127.0.0.1:10087/eureka" target="_blank" rel="noopener">http://127.0.0.1:10087/eureka</a></pre></code></p>
+<p>所谓的高可用注册中心，其实就是把EurekaServer自己也作为一个服务进行注册，这样多个EurekaServer之间就能互相发现对方，从而形成集群。因此我们做了以下修改：</p>
+<ul>
+<li>删除了register-with-eureka=false和fetch-registry=false两个配置。因为默认值是true，这样就会吧自己注册到注册中心了。</li>
+<li>把service-url的值改成了另外一台EurekaServer的地址，而不是自己</li>
+</ul>
+<p>2）另外一台配置恰好相反：<code><pre>server:<br>  port: 10087 # 端口<br>spring:<br>  application:<br>    name: eureka-server # 应用名称，会在Eureka中显示<br>eureka:<br>  client:<br>    service-url: # 配置其他Eureka服务的地址，而不是自己，比如10087<br>      defaultZone: <a href="http://127.0.0.1:10086/eureka" target="_blank" rel="noopener">http://127.0.0.1:10086/eureka</a></pre></code></p>
+<p>注意：idea中一个应用不能启动两次，我们需要重新配置一个启动器：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525615070033.png" alt="1525615070033" class="lazyload"></p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525615095693.png" alt="1525615095693" class="lazyload"></p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525615026937.png" alt="1525615026937" class="lazyload"></p>
+<p>然后启动即可。</p>
+<p>3）启动测试：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525615165157.png" alt="1525615165157" class="lazyload"></p>
+<p>4）客户端注册服务到集群</p>
+<p>因为EurekaServer不止一个，因此注册服务的时候，service-url参数需要变化：<code><pre>eureka:<br>  client:<br>    service-url: # EurekaServer地址,多个地址以','隔开<br>      defaultZone: <a href="http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka" target="_blank" rel="noopener">http://127.0.0.1:10086/eureka,http://127.0.0.1:10087/eureka</a></pre></code></p>
+<h3 id="6-4-3-服务提供者"><a href="#6-4-3-服务提供者" class="headerlink" title="6.4.3.服务提供者"></a>6.4.3.服务提供者</h3><p>服务提供者要向EurekaServer注册服务，并且完成服务续约等工作。</p>
+<blockquote>
+<p>服务注册</p>
+</blockquote>
+<p>服务提供者在启动时，会检测配置属性中的：<code>eureka.client.register-with-erueka=true</code>参数是否正确，事实上默认就是true。如果值确实为true，则会向EurekaServer发起一个Rest请求，并携带自己的元数据信息，Eureka Server会把这些信息保存到一个双层Map结构中。第一层Map的Key就是服务名称，第二层Map的key是服务的实例id。</p>
+<blockquote>
+<p>服务续约</p>
+</blockquote>
+<p>在注册服务完成以后，服务提供者会维持一个心跳（定时向EurekaServer发起Rest请求），告诉EurekaServer：“我还活着”。这个我们称为服务的续约（renew）；</p>
+<p>有两个重要参数可以修改服务续约的行为：<code><pre>eureka:<br>  instance:<br>    lease-expiration-duration-in-seconds: 90<br>    lease-renewal-interval-in-seconds: 30</pre></code></p>
+<ul>
+<li>lease-renewal-interval-in-seconds：服务续约(renew)的间隔，默认为30秒</li>
+<li>lease-expiration-duration-in-seconds：服务失效时间，默认值90秒</li>
+</ul>
+<p>也就是说，默认情况下每个30秒服务会向注册中心发送一次心跳，证明自己还活着。如果超过90秒没有发送心跳，EurekaServer就会认为该服务宕机，会从服务列表中移除，这两个值在生产环境不要修改，默认即可。</p>
+<p>但是在开发时，这个值有点太长了，经常我们关掉一个服务，会发现Eureka依然认为服务在活着。所以我们在开发阶段可以适当调小。<code><pre>eureka:<br>  instance:<br>    lease-expiration-duration-in-seconds: 10 # 10秒即过期<br>    lease-renewal-interval-in-seconds: 5 # 5秒一次心跳</pre></code></p>
+<blockquote>
+<p>实例id</p>
+</blockquote>
+<p>先来看一下服务状态信息：</p>
+<p>在Eureka监控页面，查看服务注册信息：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525617060656.png" alt="1525617060656" class="lazyload"></p>
+<p>在status一列中，显示以下信息：</p>
+<ul>
+<li>UP(1)：代表现在是启动了1个示例，没有集群</li>
+<li>DESKTOP-2MVEC12:user-service:8081：是示例的名称（instance-id），<ul>
+<li>默认格式是：<code>${hostname} + ${spring.application.name} + ${server.port}</code></li>
+<li>instance-id是区分同一服务的不同实例的唯一标准，因此不能重复。</li>
+</ul>
+</li>
+</ul>
+<p>我们可以通过instance-id属性来修改它的构成：<code><pre>eureka:<br>  instance:<br>    instance-id: ${spring.application.name}:${server.port}</pre></code></p>
+<p>重启服务再试试看：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525617542081.png" alt="1525617542081" class="lazyload"></p>
+<h3 id="6-4-4-服务消费者"><a href="#6-4-4-服务消费者" class="headerlink" title="6.4.4.服务消费者"></a>6.4.4.服务消费者</h3><blockquote>
+<p>获取服务列表</p>
+</blockquote>
+<p>当服务消费者启动是，会检测<code>eureka.client.fetch-registry=true</code>参数的值，如果为true，则会从Eureka Server服务的列表只读备份，然后缓存在本地。并且<code>每隔30秒</code>会重新获取并更新数据。我们可以通过下面的参数来修改：<code><pre>eureka:<br>  client:<br>    registry-fetch-interval-seconds: 5</pre></code></p>
+<p>生产环境中，我们不需要修改这个值。</p>
+<p>但是为了开发环境下，能够快速得到服务的最新状态，我们可以将其设置小一点。</p>
+<h3 id="6-4-5-失效剔除和自我保护"><a href="#6-4-5-失效剔除和自我保护" class="headerlink" title="6.4.5.失效剔除和自我保护"></a>6.4.5.失效剔除和自我保护</h3><blockquote>
+<p>失效剔除</p>
+</blockquote>
+<p>有些时候，我们的服务提供方并不一定会正常下线，可能因为内存溢出、网络故障等原因导致服务无法正常工作。Eureka Server需要将这样的服务剔除出服务列表。因此它会开启一个定时任务，每隔60秒对所有失效的服务（超过90秒未响应）进行剔除。</p>
+<p>可以通过<code>eureka.server.eviction-interval-timer-in-ms</code>参数对其进行修改，单位是毫秒，生成环境不要修改。</p>
+<p>这个会对我们开发带来极大的不变，你对服务重启，隔了60秒Eureka才反应过来。开发阶段可以适当调整，比如10S</p>
+<blockquote>
+<p>自我保护</p>
+</blockquote>
+<p>我们关停一个服务，就会在Eureka面板看到一条警告：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525618396076.png" alt="1525618396076" class="lazyload"></p>
+<p>这是触发了Eureka的自我保护机制。当一个服务未按时进行心跳续约时，Eureka会统计最近15分钟心跳失败的服务实例的比例是否超过了85%。在生产环境下，因为网络延迟等原因，心跳失败实例的比例很有可能超标，但是此时就把服务剔除列表并不妥当，因为服务可能没有宕机。Eureka就会把当前实例的注册信息保护起来，不予剔除。生产环境下这很有效，保证了大多数服务依然可用。</p>
+<p>但是这给我们的开发带来了麻烦， 因此开发阶段我们都会关闭自我保护模式：<code><pre>eureka:<br>  server:<br>    enable-self-preservation: false # 关闭自我保护模式（缺省为打开）<br>    eviction-interval-timer-in-ms: 1000 # 扫描失效服务的间隔时间（缺省为60*1000ms）</pre></code></p>
+<h1 id="7-负载均衡Robbin"><a href="#7-负载均衡Robbin" class="headerlink" title="7.负载均衡Robbin"></a>7.负载均衡Robbin</h1><p>在刚才的案例中，我们启动了一个user-service，然后通过DiscoveryClient来获取服务实例信息，然后获取ip和端口来访问。</p>
+<p>但是实际环境中，我们往往会开启很多个user-service的集群。此时我们获取的服务列表中就会有多个，到底该访问哪一个呢？</p>
+<p>一般这种情况下我们就需要编写负载均衡算法，在多个实例列表中进行选择。</p>
+<p>不过Eureka中已经帮我们集成了负载均衡组件：Ribbon，简单修改代码即可使用。</p>
+<p>什么是Ribbon：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525619257397.png" alt="1525619257397" class="lazyload"></p>
+<p>接下来，我们就来使用Ribbon实现负载均衡。</p>
+<h2 id="7-1-启动两个服务实例"><a href="#7-1-启动两个服务实例" class="headerlink" title="7.1.启动两个服务实例"></a>7.1.启动两个服务实例</h2><p>首先我们启动两个user-service实例，一个8081，一个8082。</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525619515586.png" alt="1525619515586" class="lazyload"></p>
+<p>Eureka监控面板：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525619546904.png" alt="1525619546904" class="lazyload"></p>
+<h2 id="7-2-开启负载均衡"><a href="#7-2-开启负载均衡" class="headerlink" title="7.2.开启负载均衡"></a>7.2.开启负载均衡</h2><p>因为Eureka中已经集成了Ribbon，所以我们无需引入新的依赖。直接修改代码：</p>
+<p>在RestTemplate的配置方法上添加<code>@LoadBalanced</code>注解：<code><pre>@Bean<br>@LoadBalanced<br>public RestTemplate restTemplate() {<br>    return new RestTemplate(new OkHttp3ClientHttpRequestFactory());<br>}</pre></code></p>
+<p>修改调用方式，不再手动获取ip和端口，而是直接通过服务名称调用：</p>
+<pre><code>@Service
+public class UserService {
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+
+    public List&lt;User&gt; queryUserByIds(List&lt;Long&gt; ids) {
+        List&lt;User&gt; users = new ArrayList&lt;&gt;();
+        // 地址直接写服务名称即可
+        String baseUrl = &quot;http://user-service/user/&quot;;
+        ids.forEach(id -&gt; {
+            // 我们测试多次查询，
+            users.add(this.restTemplate.getForObject(baseUrl + id, User.class));
+            // 每次间隔500毫秒
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        return users;
+    }
+}</code></pre><p>访问页面，查看结果：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525620305704.png" alt="1525620305704" class="lazyload"></p>
+<p>完美！</p>
+<h2 id="7-3-源码跟踪"><a href="#7-3-源码跟踪" class="headerlink" title="7.3.源码跟踪"></a>7.3.源码跟踪</h2><p>为什么我们只输入了service名称就可以访问了呢？之前还要获取ip和端口。</p>
+<p>显然有人帮我们根据service名称，获取到了服务实例的ip和端口。它就是<code>LoadBalancerInterceptor</code></p>
+<p>我们进行源码跟踪：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525620483637.png" alt="1525620483637" class="lazyload"></p>
+<p>继续跟入execute方法：发现获取了8082端口的服务</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525620787090.png" alt="1525620787090" class="lazyload"></p>
+<p>再跟下一次，发现获取的是8081：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525620835911.png" alt="1525620835911" class="lazyload"></p>
+<h2 id="7-4-负载均衡策略"><a href="#7-4-负载均衡策略" class="headerlink" title="7.4.负载均衡策略"></a>7.4.负载均衡策略</h2><p>Ribbon默认的负载均衡策略是简单的轮询，我们可以测试一下：</p>
+<p>编写测试类，在刚才的源码中我们看到拦截中是使用RibbonLoadBalanceClient来进行负载均衡的，其中有一个choose方法，是这样介绍的：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622320277.png" alt="1525622320277" class="lazyload"></p>
+<p>现在这个就是负载均衡获取实例的方法。</p>
+<p>我们对注入这个类的对象，然后对其测试：</p>
+<pre><code>@RunWith(SpringRunner.class)
+@SpringBootTest(classes = UserConsumerDemoApplication.class)
+public class LoadBalanceTest {
+    @Autowired
+    RibbonLoadBalancerClient client;
+
+    @Test
+    public void test(){
+        for (int i = 0; i &lt; 100; i++) {
+            ServiceInstance instance = this.client.choose(&quot;user-service&quot;);
+            System.out.println(instance.getHost() + &quot;:&quot; + instance.getPort());
+        }
+    }
+}</code></pre><p>结果：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622357371.png" alt="1525622357371" class="lazyload"></p>
+<p>符合了我们的预期推测，确实是轮询方式。</p>
+<p>我们是否可以修改负载均衡的策略呢？</p>
+<p>继续跟踪源码，发现这么一段代码：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622652849.png" alt="1525622652849" class="lazyload"></p>
+<p>我们看看这个rule是谁：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622699666.png" alt="1525622699666" class="lazyload"></p>
+<p>这里的rule默认值是一个<code>RoundRobinRule</code>，看类的介绍：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622754316.png" alt="1525622754316" class="lazyload"></p>
+<p>这不就是轮询的意思嘛。</p>
+<p>我们注意到，这个类其实是实现了接口IRule的，查看一下：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622817451.png" alt="1525622817451" class="lazyload"></p>
+<p>定义负载均衡的规则接口。</p>
+<p>它有以下实现：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525622876842.png" alt="1525622876842" class="lazyload"></p>
+<p>SpringBoot也帮我们提供了修改负载均衡规则的配置入口：<code><pre>user-service:<br>  ribbon:<br>    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule</pre></code></p>
+<p>格式是：<code>{服务名称}.ribbon.NFLoadBalancerRuleClassName</code>，值就是IRule的实现类。</p>
+<p>再次测试，发现结果变成了随机：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525623193949.png" alt="1525623193949" class="lazyload"></p>
+<h2 id="7-5-重试机制"><a href="#7-5-重试机制" class="headerlink" title="7.5.重试机制"></a>7.5.重试机制</h2><p>Eureka的服务治理强调了CAP原则中的AP，即可用性和可靠性。它与Zookeeper这一类强调CP（一致性，可靠性）的服务治理框架最大的区别在于：Eureka为了实现更高的服务可用性，牺牲了一定的一致性，极端情况下它宁愿接收故障实例也不愿丢掉健康实例，正如我们上面所说的自我保护机制。</p>
+<p>但是，此时如果我们调用了这些不正常的服务，调用就会失败，从而导致其它服务不能正常工作！这显然不是我们愿意看到的。</p>
+<p>我们现在关闭一个user-service实例：</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525653565855.png" alt="1525653565855" class="lazyload"></p>
+<p>因为服务剔除的延迟，consumer并不会立即得到最新的服务列表，此时再次访问你会得到错误提示：</p>
+<p><img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525653715488.png" alt="1525653715488" class="lazyload"></p>
+<p>但是此时，8081服务其实是正常的。</p>
+<p>因此Spring Cloud 整合了Spring Retry 来增强RestTemplate的重试能力，当一次服务调用失败后，不会立即抛出一次，而是再次重试另一个服务。</p>
+<p>只需要简单配置即可实现Ribbon的重试：<code><pre>spring:<br>  cloud:<br>    loadbalancer:<br>      retry:<br>        enabled: true # 开启Spring Cloud的重试功能<br>user-service:<br>  ribbon:<br>    ConnectTimeout: 250 # Ribbon的连接超时时间<br>    ReadTimeout: 1000 # Ribbon的数据读取超时时间<br>    OkToRetryOnAllOperations: true # 是否对所有操作都进行重试<br>    MaxAutoRetriesNextServer: 1 # 切换实例的重试次数<br>    MaxAutoRetries: 1 # 对当前实例的重试次数</pre></code></p>
+<p>根据如上配置，当访问到某个服务超时后，它会再次尝试访问下一个服务实例，如果不行就再换一个实例，如果不行，则返回失败。切换次数取决于<code>MaxAutoRetriesNextServer</code>参数的值</p>
+<p>引入spring-retry依赖<code><pre>&lt;dependency><br>    &lt;groupId>org.springframework.retry&lt;/groupId><br>    &lt;artifactId>spring-retry&lt;/artifactId><br>&lt;/dependency></pre></code></p>
+<p>我们重启user-consumer-demo，测试，发现即使user-service2宕机，也能通过另一台服务实例获取到结果！</p>
+<p> <img data-sizes="auto" data-src="/2020/07/31/springcloud-01/1525658269456.png" alt="1525658269456" class="lazyload"></p>
+
+  </article>
+
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+        <a class="nexmoefont icon-appstore-fill -link" href="/categories/springcloud/">springcloud</a>
+    
+    
+        <a class="nexmoefont icon-tag-fill -link" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/" rel="tag">微服务</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+      
+  <div class="nexmoe-post-copyright">
+    <strong>Author：</strong>laolei<br>
+    <strong>Link：</strong><a href="http://yoursite.com/2020/07/31/springcloud-01/" title="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;07&#x2F;31&#x2F;springcloud-01&#x2F;" target="_blank" rel="noopener">http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;07&#x2F;31&#x2F;springcloud-01&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+    
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script >hljs.initHighlightingOnLoad();</script>
+
+
+    <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+
+
+<script src="/js/app.js?v=1596681758827"></script>
+  
+
+
+
+
+
+</body>
+
+</html>
